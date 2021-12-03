@@ -4,7 +4,7 @@ def p1():
     data = open("inp.txt", "r").read().splitlines()
     dar = []
     for d in data:
-        a = [int(i) for i in d.split()[0]]
+        a = [int(i) for i in d]
         dar.append(a)
     ar = np.array(dar)
     bitnum1 = ar.sum(axis=0) >= ar.shape[0]/2
