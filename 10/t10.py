@@ -10,7 +10,7 @@ def p1():
     clo = ")]}>"
     ope = "([{<"
     tr = dict(zip(clo, ope))
-    vals = {')':3, ']':57, '}':1197, '>':25137}
+    vals = {")": 3, "]": 57, "}": 1197, ">": 25137}
     errors = []
     for d in data:
         co = defaultdict(int)
@@ -30,13 +30,14 @@ def p1():
     res = sum([vals[k] for k in errors])
     print(res)
 
+
 def p2():
     data = open("inp.txt", "r").read().splitlines()
     clo = ")]}>"
     ope = "([{<"
     tr = dict(zip(clo, ope))
     un = dict(zip(ope, clo))
-    ends = {')':1, ']':2, '}':3, '>':4}
+    ends = {")": 1, "]": 2, "}": 3, ">": 4}
     results = []
     for d in data:
         co = defaultdict(int)
@@ -54,12 +55,13 @@ def p2():
             closers = list(reversed([un[k] for k in stack]))
             su = 0
             for cl in closers:
-                su = 5*su+ends[cl]
+                su = 5 * su + ends[cl]
             results.append(su)
     so = list(sorted(results))
-    middleIndex = (len(so) - 1)//2
+    middleIndex = (len(so) - 1) // 2
     print(so[middleIndex])
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     # p1()
     p2()
