@@ -37,14 +37,12 @@ def p1():
     for fw, fi in folds:
         print(fw,fi)
         if fw == 'y':
-            fi = tab.shape[0]//2
             a = tab[:fi]
             if tab.shape[0]%2 == 1:
                 addp = 1
             else:
                 addp = 0
             b = tab[fi+addp:]
-            # b = np.flip(b, axis=1)
             a = np.flip(a, axis=0)
             tab = a |  b
 
