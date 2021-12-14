@@ -44,21 +44,18 @@ def p2():
         elif i>1:
             a,b = d.split(" -> ")
             rul[a] = b
-    general_counter = Counter()
     word_counter = Counter(seq)
-    for j in range(1,len(seq)):
-        a,b = seq[j-1], seq[j]
-        t = seq[j-1]+seq[j]
-        general_counter[(a,b)] += 1
+    pairs = [seq[j-1:j+1] for j in range(1,len(seq))]
+    general_counter = Counter(pairs)
     size = 40
     for n in range(size):
         oldgc = general_counter.copy()
         for p,v in oldgc.items():
-            a,b = p
+            a,b = p[0], p[1]
             r = rul[a+b]
-            general_counter[(a,b)] -= v
-            general_counter[(a,r)] += v
-            general_counter[(r,b)] += v
+            general_counter[a+b] -= v
+            general_counter[a+r] += v
+            general_counter[r+b] += v
             word_counter[r] += v
     s = sorted(word_counter.items(), key=lambda x: x[1])
     mi, ma = s[0], s[-1]
