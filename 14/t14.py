@@ -49,14 +49,14 @@ def p2():
     general_counter = Counter(pairs)
     size = 40
     for n in range(size):
-        oldgc = general_counter.copy()
-        for p,v in oldgc.items():
+        newc = Counter()
+        for p,v in general_counter.items():
             a,b = p[0], p[1]
             r = rul[a+b]
-            general_counter[a+b] -= v
-            general_counter[a+r] += v
-            general_counter[r+b] += v
+            newc[a+r] += v
+            newc[r+b] += v
             word_counter[r] += v
+        general_counter = newc
     s = sorted(word_counter.items(), key=lambda x: x[1])
     mi, ma = s[0], s[-1]
     print(ma[1]-mi[1])
