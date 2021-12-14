@@ -44,24 +44,23 @@ def p2():
         elif i>1:
             a,b = d.split(" -> ")
             rul[a] = b
-    pairs = defaultdict(int)
+    general_counter = Counter()
+    word_counter = Counter(seq)
     for j in range(1,len(seq)):
         a,b = seq[j-1], seq[j]
         t = seq[j-1]+seq[j]
-        pairs[t] += 1
+        general_counter[(a,b)] += 1
     size = 40
-    c = Counter(seq)
     for n in range(size):
-        oldpairs = pairs.copy()
-        for p,v in oldpairs.items():
-            a,b = p[0], p[1]
-            r = rul[p]
-            newp = a+r
-            pairs[p] -= v
-            pairs[newp] += v
-            pairs[r+b] += v
-            c[r] += v
-    s = sorted(c.items(), key=lambda x: x[1])
+        oldgc = general_counter.copy()
+        for p,v in oldgc.items():
+            a,b = p
+            r = rul[a+b]
+            general_counter[(a,b)] -= v
+            general_counter[(a,r)] += v
+            general_counter[(r,b)] += v
+            word_counter[r] += v
+    s = sorted(word_counter.items(), key=lambda x: x[1])
     mi, ma = s[0], s[-1]
     print(ma[1]-mi[1])
 
