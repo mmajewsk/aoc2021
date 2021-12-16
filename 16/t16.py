@@ -154,39 +154,19 @@ def process2(dec):
         dbg('litereal')
         return msg, res
     else:
-        if ipid == 0:
-            dbg('sum')
-            msgs, res = work(res, process2)
-            return sum(msgs), res
-        if ipid == 1:
-            dbg('prod')
-            msgs, res = work(res, process2)
-            return prod(msgs), res
 
-        if ipid == 2:
-            dbg('prod')
-            msgs, res = work(res, process2)
-            return min(msgs), res
-
-        if ipid == 3:
-            dbg('prod')
-            msgs, res = work(res, process2)
-            return max(msgs), res
-
-        if ipid == 5:
-            dbg('prod')
-            msgs, res = work(res, process2)
-            return int(msgs[0]>msgs[1]), res
-
-        if ipid == 6:
-            dbg('prod')
-            msgs, res = work(res, process2)
-            return int(msgs[0]<msgs[1]), res
-
-        if ipid == 7:
-            dbg('prod')
-            msgs, res = work(res, process2)
-            return int(msgs[0]==msgs[1]), res
+        msgs, res = work(res, process2)
+        operations = {
+            0: sum,
+            1: prod,
+            2: min,
+            3: max,
+            5: lambda x: int(x[0]>x[1]),
+            6: lambda x: int(x[0]<x[1]),
+            7: lambda x: int(x[0]==x[1]),
+        }
+        bar = operations[ipid]
+        return bar(msgs), res
 
 def test_string2(opex):
     dbg('=========')
