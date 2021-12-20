@@ -48,12 +48,12 @@ def sol(args, iterations):
     img2 = np.array(img)
     border = 2
     b = np.pad(img2,((border,border),(border,border)), 'constant', constant_values=0)
+
     for it in range(iterations):
         win = sliding_window_view(b,(3,3))
         tmp = np.zeros(win.shape[:2], dtype=int)
-        for i in range(tmp.shape[0]):
-            for j in range(tmp.shape[0]):
-                tmp[i,j] = subar(win[i,j])
+        for i, j in np.ndindex(tmp.shape):
+            tmp[i,j] = subar(win[i,j])
         flip = flipper(it)
         b = np.pad(tmp,((border,border),(border,border)), 'constant', constant_values=flip)
     res = b.sum()
